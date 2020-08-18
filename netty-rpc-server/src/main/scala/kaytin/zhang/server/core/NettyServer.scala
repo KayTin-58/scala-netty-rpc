@@ -37,6 +37,7 @@ class NettyServer(serverAddress: Address) extends Server {
         /**
          * register server to zk
          */
+        serviceRegistry.registerServer(serverAddress,serverMap)
         future.channel().closeFuture().sync()
       } catch {
         case e: Exception => {

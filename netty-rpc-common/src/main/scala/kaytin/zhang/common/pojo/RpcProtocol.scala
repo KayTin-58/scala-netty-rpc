@@ -1,6 +1,9 @@
 package kaytin.zhang.common.pojo
+
 import kaytin.zhang.common.utils.JsonUtil
+
 import scala.util.Random
+
 
 class RpcProtocol {
 
@@ -9,15 +12,6 @@ class RpcProtocol {
   var port: Int = _
   var serviceName: String = _
   var version: String = _
-
-  /**
-   * this to json
-   *
-   * @return
-   */
-  def toJson: String = {
-    JsonUtil.objectToJson(this)
-  }
 
   override def equals(o: Any): Boolean = {
     if (this == o) return true
@@ -28,5 +22,26 @@ class RpcProtocol {
 
   override def hashCode(): Int = {
     new Random().nextInt(Integer.MAX_VALUE) + System.currentTimeMillis().toInt
+  }
+}
+
+object RpcProtocol {
+  /**
+   * this to json
+   *
+   * @return
+   */
+  def toJson: String = {
+    JsonUtil.objectToJson(this)
+  }
+
+  /**
+   * json to this
+   *
+   * @param json json
+   * @return RpcProtocol
+   */
+  def fromJson(json: String): RpcProtocol = {
+    JsonUtil.jsonToObject[RpcProtocol](json, classOf[RpcProtocol])
   }
 }

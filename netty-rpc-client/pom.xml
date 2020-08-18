@@ -11,5 +11,12 @@
 
     <artifactId>netty-rpc-client</artifactId>
 
+    <dependencies>
+        <dependency>
+            <artifactId>netty-rpc-common</artifactId>
+            <groupId>org.kaytin.zhang</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

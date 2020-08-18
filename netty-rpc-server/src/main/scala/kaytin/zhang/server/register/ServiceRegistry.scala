@@ -43,7 +43,7 @@ class ServiceRegistry {
       } else {
         rpcProtocol.version = ""
       }
-      val data = rpcProtocol.toJson
+      val data = RpcProtocol.toJson
       val bytes = data.getBytes
       val path = Constants.ZK_DATA_PATH + rpcProtocol.hashCode()
       curatorClient.createPathData(path, bytes)

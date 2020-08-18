@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.core.{JsonGenerator, JsonParser}
-import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper, SerializationFeature}
+import com.fasterxml.jackson.databind.{DeserializationFeature, JavaType, ObjectMapper, SerializationFeature}
 
 object JsonUtil {
   private val objMapper = new ObjectMapper
@@ -31,6 +31,12 @@ object JsonUtil {
         throw new IllegalStateException(e.getMessage, e)
     }
     json
+  }
+
+
+  def jsonToObject[T](json: String, cls: Class[T]): T = {
+    val javaType = objMapper.getTypeFactory.constructType(cls)
+    objMapper.readValue[T](json,javaType)
   }
 
 }
