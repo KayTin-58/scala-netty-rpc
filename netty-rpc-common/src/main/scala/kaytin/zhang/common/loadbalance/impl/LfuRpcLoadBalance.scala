@@ -55,7 +55,7 @@ class LfuRpcLoadBalance extends RpcLoadBalance {
    * @return
    */
   def doRoutine(serverKey: String): RpcProtocol = {
-    val rpcProtocols: ListBuffer[RpcProtocol] = _serverNodes(serverKey)
+    val rpcProtocols: ListBuffer[RpcProtocol] = _serverNodes.get(serverKey)
     // 缓存失效
     if (System.currentTimeMillis() > CACHE_VALID_TIME) {
       jobLfuMap.clear()
@@ -77,7 +77,6 @@ class LfuRpcLoadBalance extends RpcLoadBalance {
       }
     })
 
-    // 淘汰失效的
     val iterator = lfuItemMap.entrySet().iterator()
     while (iterator.hasNext) {
       val item = iterator.next()
